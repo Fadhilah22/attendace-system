@@ -74,7 +74,9 @@ public class App {
 
             StringBuilder res = new StringBuilder();
             while(result.next()) {
-                res.append(result.getString("username"))
+                res.append(result.getString("userid"))
+                    .append(" ")
+                    .append(result.getString("username"))
                     .append(" ")
                     .append(result.getString("datein"))
                     .append("\n");
@@ -131,7 +133,7 @@ public class App {
 
             } else {
                 // Handle the case where no rows are returned for the given id
-                System.out.println("No data found for user with id: " + id);
+                return "No data found for user with id: " + id;
             }
 
             // delete user from userstub

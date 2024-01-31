@@ -5,6 +5,10 @@ import static spark.Spark.*;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.apache.log4j.BasicConfigurator;
+
+// web browser
+import com.fadlan.CorsConfig;
 
 // db
 import com.fadlan.DatabaseConnection;
@@ -23,7 +27,17 @@ public class App {
     private static Gson gson = new Gson();
 
     public static void main(String[] args) {
+
         port(8080);
+
+        BasicConfigurator.configure();
+
+        // Serve static files from the specified directory
+        staticFiles.externalLocation("../web");
+
+        // enable cors
+        CorsConfig.enableCORS("*", "*", "*");
+
         Dotenv db_data =  Dotenv.configure()
                                 .directory("assets")
                                 .filename(".env") // instead of '.env', use 'env'
@@ -152,5 +166,6 @@ public class App {
 
           return "0";
         });
+
     }
 }

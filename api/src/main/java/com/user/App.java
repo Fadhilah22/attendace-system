@@ -1,25 +1,23 @@
-package com.fadlan;
+package com.user;
 
 // Http Server
 import static spark.Spark.*;
-import com.google.gson.Gson;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.apache.log4j.BasicConfigurator;
 
-// web browser
-import com.fadlan.CorsConfig;
-
-// db
-import com.fadlan.DatabaseConnection;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.cors.CorsConfig;
+import com.database.DatabaseConnection;
+import com.google.gson.Gson;
+
 // util
-import java.util.UUID;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class App {
@@ -33,7 +31,7 @@ public class App {
         BasicConfigurator.configure();
 
         // Serve static files from the specified directory
-        staticFiles.externalLocation("../web");
+        staticFiles.externalLocation("../web/");
 
         // enable cors
         CorsConfig.enableCORS("*", "*", "*");
@@ -63,11 +61,25 @@ public class App {
 
             if(userStub == null){
                 response.status(400);
-                return "UserNotCreated";
+                return "User Not Created";
             }
-            String id = UUID.randomUUID().toString();
-            userStub.setId(id);
 
+            // String id = UUID.randomUUID().toString();
+            // userStub.setId(id);
+
+            // find if id already exist
+            PreparedStatement findQuery = con.prepareStatement(
+                "SELECT userid FROM userstub WHERE userid LIKE ?;"
+            );
+            findQuery.setString(1, userStub.getId());
+            ResultSet findResult = findQuery.executeQuery();
+            if(findResult.next()){
+                // means the query did resturn a value (supposed to be the value of similiar id)
+                response.status(409);
+                return "data exists";
+            }
+
+            // insert data into server
             PreparedStatement statement = con.prepareStatement(
               "INSERT INTO userstub (userid, username, useremail, datein) " +
               "VALUES (?, ?, ?, NOW())");
@@ -78,7 +90,7 @@ public class App {
             int rowsAffected = statement.executeUpdate();
 
             response.status(200);
-            return "User created with ID" + id + ", rows affected " + rowsAffected;
+            return "User created with ID" + userStub.getId() + ", rows affected " + rowsAffected;
         });
 
         // Read -> http GET
@@ -103,6 +115,7 @@ public class App {
         // Delete -> http DELETE
         delete("/users", (request, response) -> {
             try {
+            // mapping recieved data into userstub class
             String json_user = request.body();
             UserStub userStub = gson.fromJson(json_user, UserStub.class);
 
@@ -135,6 +148,7 @@ public class App {
                 statement.setTimestamp(2, datein);
 
                 int rowsAffectedUpdate1 = statement.executeUpdate();
+                System.out.println("" + rowsAffectedUpdate1);
                 statement.close();
 
                 statement = con.prepareStatement("SELECT dateout FROM userlog WHERE userid LIKE ?");
@@ -147,6 +161,7 @@ public class App {
 
             } else {
                 // Handle the case where no rows are returned for the given id
+                response.status(404);
                 return "No data found for user with id: " + id;
             }
 
@@ -156,15 +171,18 @@ public class App {
 
 
             int rowsAffectedUpdate2 = statement.executeUpdate();
+            System.out.println("" + rowsAffectedUpdate2);
             statement.close();
+
+            response.status(200);
 
             return "User with id " + id + " deleted";
 
-          } catch (SQLException e) {
-              e.printStackTrace();
-          }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-          return "0";
+            return "0";
         });
 
     }

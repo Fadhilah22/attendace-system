@@ -1,0 +1,59 @@
+/* @font-face {
+
+} */
+
+*{
+    font-family: 'cascadia mono';
+}
+
+.form-wrapper{
+    background-color: rgba(150, 150, 150);
+    width: 400px;
+    margin: auto;
+    padding: 20px;
+}
+
+.back-button{
+    color: black;
+    border: solid;
+    padding:5px;
+    text-decoration: none;
+}
+.back-button:hover{
+    cursor: pointer;
+    background-color: rgba(170, 170, 170);
+}
+
+.form-box{
+    margin: auto;
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+.input-box{
+    width: 250px;
+    height: 30px;
+    margin: 10px 0 10px 0;
+    background-color: transparent;
+    border:none;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.8);
+}
+.input-box:focus{
+    outline: none;
+    padding-bottom: 5px;
+}
+
+.input-box::placeholder{
+    color: rgba(50, 50, 50);
+}
+
+.input-button{
+    margin: 10px 0 0 0;
+    background-color: transparent;
+    border: solid;
+    padding: 10px;
+}
+.input-button:hover{
+    cursor: pointer;
+    background-color: rgba(170, 170, 170);
+}

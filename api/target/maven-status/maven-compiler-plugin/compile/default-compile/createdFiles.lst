@@ -1,4 +1,7 @@
-com\fadlan\CorsConfig.class
-com\fadlan\DatabaseConnection.class
-com\fadlan\UserStub.class
-com\fadlan\App.class
+com\user\App.class
+com\database\DatabaseConnection.class
+com\admin\AdminLogin.class
+com\cors\CorsConfig.class
+com\user\UserStub.class
+com\admin\AdminStub.class
+com\encryption\PasswordEncrypt.class

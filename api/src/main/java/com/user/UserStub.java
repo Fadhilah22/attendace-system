@@ -1,6 +1,4 @@
-package com.fadlan;
-
-import java.sql.Timestamp;
+package com.user;
 
 public class UserStub{
     private String id;

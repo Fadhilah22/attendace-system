@@ -58,7 +58,7 @@
             <artifactId>exec-maven-plugin</artifactId>
             <version>3.1.1</version>
             <configuration>
-                <mainClass>com.fadlan.App</mainClass>
+                <mainClass>com.admin.AdminLogin</mainClass>
                 <!-- Replace com.example.MyApplication with your actual main class -->
             </configuration>
         </plugin>

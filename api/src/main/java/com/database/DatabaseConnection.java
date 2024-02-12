@@ -1,13 +1,9 @@
-package com.fadlan;
+package com.database;
 
 // java sql
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.Statement;
 import java.sql.SQLException;
-
-// JDBC
-import org.postgresql.util.*;
 
 public class DatabaseConnection {
     private String URL;

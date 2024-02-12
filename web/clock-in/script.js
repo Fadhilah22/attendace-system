@@ -13,11 +13,10 @@ document.getElementById('attendance-form')
         jsonObject[key] = value;
     });
 
+    // DEBUGGING
+    console.log(jsonObject.id);
     console.log(jsonObject.name);
     console.log(jsonObject.email);
-
-
-
 
     // send JSON data using Fetch API
     fetch('http://localhost:8080/users', {
@@ -27,12 +26,29 @@ document.getElementById('attendance-form')
         },
         body: JSON.stringify(jsonObject),
     })
-    .then(response => response.json())
+    .then(response => {
+        if(response.status == 200){
+            // RESPONSE OK
+            return response.json();
+        } else if (response.status == 409){
+            // DATA ALREADY EXISTS
+            throw new Error("DuplicateError");
+        }
+    })
     .then(data => {
         console.log(data);
     })
     .catch(error => {
-        console.error('Error: ', error);
+        if(error instanceof SyntaxError){
+            alert("Data added");
+            document.getElementById('attendance-form').reset();
+        } else if (error.message == "DuplicateError") {
+            console.error('', error);
+            alert("data with similiar id exists");
+        } else {
+            console.error('', error);
+            alert("oops, server error");
+        }
     });
 
 });

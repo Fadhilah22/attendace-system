@@ -1,4 +1,4 @@
-package com.fadlan;
+package com.cors;
 
 import static spark.Spark.*;
 

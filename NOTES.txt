@@ -1,0 +1,12 @@
+-> try to change reference/link to server by ip address
+instead of 'localhost', therefore you need to deal with
+ip credential (.env will come in handy). [INURGENT | TEDIOUS TASK]
+
+-> make the ui to be reactive (desk, tablet, mobile) [MIDURGENT | HEAVY TASK]
+
+-> [NEW FEATURE] make an admin page that can be accessed via entry page. [URGENT | MEDIUM TASK]
+admin can:
+    - LOGIN [ONGOING]
+    - see lists of attendee (userstub)
+    - remove a data from userstub and userlog
+    - get time-elapsed from a user (userlog)

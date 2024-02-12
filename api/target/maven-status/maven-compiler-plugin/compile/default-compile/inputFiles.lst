@@ -1,4 +1,7 @@
-C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\fadlan\App.java
-C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\fadlan\CorsConfig.java
-C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\fadlan\DatabaseConnection.java
-C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\fadlan\UserStub.java
+C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\user\App.java
+C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\cors\CorsConfig.java
+C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\encryption\PasswordEncrypt.java
+C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\user\UserStub.java
+C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\admin\AdminLogin.java
+C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\database\DatabaseConnection.java
+C:\Users\Fadhlan\Desktop\latihan\Java\smol_project\AttendanceSystem\api\src\main\java\com\admin\AdminStub.java

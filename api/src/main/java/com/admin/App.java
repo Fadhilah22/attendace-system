@@ -82,15 +82,15 @@ public class App {
                     userListsFin.append(userLists.getString("datein"));
                     userListsFin.append(" ");
                     userListsFin.append(userLists.getString("datecurrent"));
-                    userListsFin.append("\n");
-
+                    userListsFin.append(" ");
 
                     Timestamp datein = userLists.getTimestamp("datein");
-
                     Timestamp datecurrent = userLists.getTimestamp
                     ("datecurrent");
 
-                    System.out.println("time elapsed >> " + countTimeElapsed(datein, datecurrent));
+                    userListsFin.append(Math.abs(countTimeElapsed(datein, datecurrent)));
+                    userListsFin.append("\n");
+                    
                 }
 
                 userQuery.close();

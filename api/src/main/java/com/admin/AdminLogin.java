@@ -34,7 +34,7 @@ public class AdminLogin {
 
     public static void main(String[] args) {
 
-        port(8081);
+        port(8082);
 
         // BasicConfigurator.configure();
 
@@ -48,7 +48,7 @@ public class AdminLogin {
         DatabaseConnection db = new DatabaseConnection(db_data.get("DB_URL"),
                                                         db_data.get("DB_USER"),
                                                         db_data.get("DB_PASSWORD"));
-        
+
         Connection con;
         try {
             con = db.connect();
@@ -58,7 +58,7 @@ public class AdminLogin {
             return;
         }
 
-        get("/users", (request, response) -> {
+        get("/login", (request, response) -> {
             StringBuilder finid = new StringBuilder();
             try {
                 // mapping recieved data into adminstub class
@@ -84,7 +84,10 @@ public class AdminLogin {
                 PreparedStatement adminQuery = con.prepareStatement("SELECT adminid, adminpassword FROM adminstub " +
                 "WHERE adminname LIKE ?");
                 adminQuery.setString(1, name);
+                
                 ResultSet nameQueryResult = adminQuery.executeQuery();
+                adminQuery.close();
+
                 // if query does returns a row
                 if(nameQueryResult.next()){
                     // validate password refered by the adminid
@@ -99,11 +102,16 @@ public class AdminLogin {
                     }
                 } else {
                     // if name does not exist in server
-                    response.status(400);
+                    response.status(404);
                     return "user not found";
                 }
 
+            } catch (SQLException e) {
+                response.status(500);
+                e.printStackTrace();
+                return "server error";
             } catch (Exception e) {
+                response.status();
                 e.printStackTrace();
             }
             return "This >> " + finid.toString();
